@@ -15,7 +15,11 @@ function Task(props) {
         <Col>
             <Card>
                 <CardBody>
-                    <CardHeader>{taskName}</CardHeader>
+                    <CardHeader>
+                        {taskName}
+                        <Button size="sm">edit</Button>
+                    </CardHeader>
+
                 </CardBody>
                 <CardBody>
                     <Alert color={alertColors[taskPriority]}>

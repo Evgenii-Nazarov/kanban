@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Column from "./Column";
 import {Container, Row} from 'reactstrap';
 import Controller from "./Controller";
+import CustomWrapper from "./CustomWrapper";
 
 
 const taskArray = [
@@ -11,20 +12,30 @@ const taskArray = [
     {id: Math.random(), name: 'Sleep', priority: 3, status: 'review'}
 ]
 
+const columnArray = [
+    {id: Math.random(), title: 'To do', status: 'todo'},
+    {id: Math.random(), title: 'Progress', status: 'progress'},
+    {id: Math.random(), title: 'Review', status: 'review'},
+    {id: Math.random(), title: 'Done', status: 'done'},
+]
+
+
 function App() {
     const statuses = ['todo', 'progress', 'review', 'done'];
     const priorities = [0, 1, 2, 3];
 
     const [tasks, setTasks] = useState(taskArray);
+    const [modal, setModal] = useState(false);
 
-    const addNewTask = (newTitle) => {
+
+    const addNewTask = (newTitle, newStatus, newPriority) => {
         const newTask = {
             id: Math.random(),
             name: newTitle,
-            priority: 0,
-            status: 'todo'
+            priority: Number(newPriority),
+            status: statuses[newStatus]
         }
-
+        console.log('newTask', newTask)
         const newTasks = [...tasks, newTask];
         setTasks(newTasks);
     }
@@ -44,23 +55,36 @@ function App() {
 
     }
 
+    const closeModal = () => {
+        setModal(false)
+    }
+
+    const openModal = () => {
+        setModal(true)
+    }
+
+
     return (
         <div>
             <Container>
+
+                <CustomWrapper modal={modal} closeModal={closeModal} addNewTask={addNewTask}/>
+
+
                 <Row className='justify-content-center'>
                     <h1>Kanban Board</h1>
                 </Row>
 
-                {/*<Row>*/}
+
                 <Row className="pb-4 mb-4 border-bottom ">
-                    <Controller addNewTask={addNewTask}/>
+                    <Controller openModal={openModal}/>
                 </Row>
-                {/*</Row>*/}
+
+
                 <Row>
-                    <Column changeTaskStatus={changeTaskStatus} tittle={'todo'} tasks={tasks}/>
-                    <Column changeTaskStatus={changeTaskStatus} tittle={'progress'} tasks={tasks}/>
-                    <Column changeTaskStatus={changeTaskStatus} tittle={'review'} tasks={tasks}/>
-                    <Column changeTaskStatus={changeTaskStatus} tittle={'done'} tasks={tasks}/>
+                    {columnArray.map(el => <Column changeTaskStatus={changeTaskStatus} column={el} tittle={'todo'}
+                                                   tasks={tasks}/>)}
+
                 </Row>
             </Container>
         </div>
