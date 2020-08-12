@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Row} from 'reactstrap';
+import {Button, Row, Col} from 'reactstrap';
 
 
 function Controller(props) {
@@ -7,10 +7,20 @@ function Controller(props) {
 
 
     return (
-        <Row>
-            <Button onClick={() => openModal()}>Add new Task</Button>
-        </Row>
+        // <Row className="justify-content-between">
+        <>
 
+            <Col xs={2}>
+
+            <Button onClick={() => openModal()}>Add new Task</Button>
+            </Col>
+            <Col xs={2}>
+
+                <Button onClick={() => openModal()}>Add new Column</Button>
+            </Col>
+         {/*</Row>*/}
+
+        </>
 
     );
 }

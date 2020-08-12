@@ -16,7 +16,7 @@ import {
 import Modal from "reactstrap/es/Modal";
 
 
-function CustomWrapper(props) {
+function addNewTaskForm (props) {
     const { modal, closeModal, addNewTask} = props;
 
     const [newTask, setNewTask] = useState('');
@@ -83,4 +83,4 @@ function CustomWrapper(props) {
     );
 }
 
-export default CustomWrapper;
+export default addNewTaskForm;

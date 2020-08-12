@@ -68,6 +68,9 @@ function App() {
         <div>
             <Container>
 
+                <CustomWrapper modal={modal} closeModal={closeModal}  addNewTask={addNewTask}/>
+
+
                 <CustomWrapper modal={modal} closeModal={closeModal} addNewTask={addNewTask}/>
 
 
@@ -76,7 +79,7 @@ function App() {
                 </Row>
 
 
-                <Row className="pb-4 mb-4 border-bottom ">
+                <Row className="pb-4 mb-4 border-bottom justify-content-between">
                     <Controller openModal={openModal}/>
                 </Row>
 
