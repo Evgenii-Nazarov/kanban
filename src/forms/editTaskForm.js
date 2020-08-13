@@ -1,36 +1,43 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button, Col, Input, Label, ModalBody, ModalFooter, ModalHeader, Row} from 'reactstrap';
 import Modal from "reactstrap/es/Modal";
 
 
-function AddNewTaskForm (props) {
-    const { modal, closeModal, addNewTask} = props;
-    const [newTask, setNewTask] = useState('');
-    const [newStatus, setNewStatus] = useState('todo');
-    const [newPriority, setNewPriority] = useState(0);
+function EditNewTaskForm (props) {
+    console.log(props)
+
+    const { modal, closeModal, editTask, task} = props;
+    const [newTask, setNewTask] = useState(task.name);
+    const [newStatus, setNewStatus] = useState(task.status);
+    const [newPriority, setNewPriority] = useState(task.priority);
+
+    useEffect(() => {
+        setNewTask(task.name);
+        setNewStatus(task.status);
+        setNewPriority(task.priority);
+    }, [props]);
 
     const submitButtonHandler = () => {
-        addNewTask(newTask, newStatus, newPriority);
-        setNewTask('');
-        setNewStatus(0);
-        setNewPriority(0);
+        editTask(task.id, newTask, newStatus, newPriority);
         closeModal()
     }
 
     const toggle = () => {
+        // setNewTask('');
+        // setNewStatus('');
+        // setNewPriority(0);
         closeModal()
-
     }
 
     return (
 
         <Modal isOpen={modal} toggle={toggle}>
 
-            <ModalHeader>Add new title</ModalHeader>
+            <ModalHeader>Edit task</ModalHeader>
             <ModalBody>
                         <Label sm={2}>Name</Label>
                         {/*<Col sm={10}>*/}
-                            <Input onChange={(e) => setNewTask(e.target.value)} type="text" name="name" placeholder="with a placeholder"/>
+                            <Input onChange={(e) => setNewTask(e.target.value)} value={newTask} type="text" name="name" placeholder="with a placeholder"/>
                         {/*</Col>*/}
 
                     <Row>
@@ -69,4 +76,4 @@ function AddNewTaskForm (props) {
     );
 }
 
-export default AddNewTaskForm;
+export default EditNewTaskForm;

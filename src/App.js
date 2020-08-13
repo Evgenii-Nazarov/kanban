@@ -26,16 +26,30 @@ function App() {
 
     const [tasks, setTasks] = useState(taskArray);
     const [modal, setModal] = useState(false);
+    const [modalState, setModalState] = useState({});
 
+
+    const editTask = (taskId, newTitle, newStatus, newPriority) => {
+        const newTask = {
+            id: Math.random(),
+            name: newTitle,
+            priority: Number(newPriority),
+            status: newStatus
+        }
+        const newTasks = tasks.map(el => {
+            if ( el.id === taskId) return newTask
+            return el
+        });
+        setTasks(newTasks);
+    }
 
     const addNewTask = (newTitle, newStatus, newPriority) => {
         const newTask = {
             id: Math.random(),
             name: newTitle,
             priority: Number(newPriority),
-            status: statuses[newStatus]
+            status: newStatus
         }
-        console.log('newTask', newTask)
         const newTasks = [...tasks, newTask];
         setTasks(newTasks);
     }
@@ -59,20 +73,16 @@ function App() {
         setModal(false)
     }
 
-    const openModal = () => {
+    const openModal = (modalState) => {
+        setModalState(modalState);
         setModal(true)
     }
-
 
     return (
         <div>
             <Container>
 
-                <CustomWrapper modal={modal} closeModal={closeModal}  addNewTask={addNewTask}/>
-
-
-                <CustomWrapper modal={modal} closeModal={closeModal} addNewTask={addNewTask}/>
-
+                <CustomWrapper editTask={editTask} modalState={modalState} modal={modal} closeModal={closeModal}  addNewTask={addNewTask}/>
 
                 <Row className='justify-content-center'>
                     <h1>Kanban Board</h1>
@@ -86,7 +96,7 @@ function App() {
 
                 <Row>
                     {columnArray.map(el => <Column changeTaskStatus={changeTaskStatus} column={el} tittle={'todo'}
-                                                   tasks={tasks}/>)}
+                                                   tasks={tasks} openModal={openModal}/>)}
 
                 </Row>
             </Container>

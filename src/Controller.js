@@ -12,7 +12,7 @@ function Controller(props) {
 
             <Col xs={2}>
 
-            <Button onClick={() => openModal()}>Add new Task</Button>
+            <Button onClick={() => openModal({form: 'addNewTask'})}>Add new Task</Button>
             </Col>
             <Col xs={2}>
 

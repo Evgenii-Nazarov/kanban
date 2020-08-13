@@ -4,7 +4,7 @@ import {Container, Row, Col} from 'reactstrap';
 
 
 function Column(props) {
-    const {tasks, tittle, changeTaskStatus, column} = props;
+    const {tasks, tittle, changeTaskStatus, column, openModal} = props;
 
     const columnTitle = column.title;
     const columnStatus = column.status;
@@ -17,7 +17,7 @@ function Column(props) {
             {/*</Col>*/}
             {tasks.filter(el => el.status === columnStatus)
                 .map(el => {
-                    return <Task changeTaskStatus={changeTaskStatus} task={el}/>
+                    return <Task changeTaskStatus={changeTaskStatus} openModal={openModal} task={el}/>
                 })}
         </Col>
 

@@ -17,7 +17,7 @@ function Task(props) {
                 <CardBody>
                     <CardHeader>
                         {taskName}
-                        <Button size="sm">edit</Button>
+                        <Button size="sm" onClick={() => props.openModal({form:'editTask', task})}>edit</Button>
                     </CardHeader>
 
                 </CardBody>
