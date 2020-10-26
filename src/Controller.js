@@ -7,7 +7,6 @@ function Controller(props) {
 
 
     return (
-        // <Row className="justify-content-between">
         <>
 
             <Col xs={2}>
